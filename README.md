@@ -1,30 +1,106 @@
-# Ai Kit Landing
+## 🔐 DevSecOps CI/CD Pipeline with Kubernetes
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+The pipeline automates testing, security scanning, containerization, and deployment to Kubernetes.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/kesarechetan2122-ternaenggacs-projects/v0-ai-kit-landing)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/AuT1XAtKELS)
+### ✅ Pipeline Stages
 
-## Overview
+1. **Code Quality Checks**
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+   - `ESLint`, `Prettier` for linting & formatting
+   - `SonarQube` for static code analysis
 
-## Deployment
+2. **Security Scanning**
 
-Your project is live at:
+   - `Trivy` scans source code, dependencies, and container images for CVEs
 
-**[https://vercel.com/kesarechetan2122-ternaenggacs-projects/v0-ai-kit-landing](https://vercel.com/kesarechetan2122-ternaenggacs-projects/v0-ai-kit-landing)**
+3. **Testing**
 
-## Build your app
+   - `Jest` or your preferred framework for unit/integration testing
 
-Continue building your app on:
+4. **Docker Build**
 
-**[https://v0.dev/chat/projects/AuT1XAtKELS](https://v0.dev/chat/projects/AuT1XAtKELS)**
+   - Dockerfile creates production-ready container image
 
-## How It Works
+5. **Push to Container Registry**
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+   - Image pushed to Docker Hub / GitHub Container Registry / GitLab Container Registry
+
+6. **Kubernetes Deployment**
+
+   - Manifest files (`deployment.yaml`, `service.yaml`, etc.)
+   - Deployed to cluster (local via Kind/minikube, or cloud like EKS/GKE)
+
+7. **Continuous Delivery**
+
+   - Automatic deployment on commit to `main` using GitHub Actions / GitLab CI
+   - Optional: Argo CD / Flux for GitOps-based deployment
+
+---
+
+### 🧱 Kubernetes Resources
+
+Your cluster may include:
+
+- `Deployment`: Handles pod replicas and rolling updates
+- `Service`: Exposes your app within/outside the cluster
+- `Ingress`: Manages external access to your app (optional)
+- `ConfigMap` / `Secret`: For managing config and sensitive data
+- `HPA`: Auto-scales app based on resource usage (optional)
+
+---
+
+### 🧪 DevSecOps Stack
+
+| Category               | Tool                          |
+| ---------------------- | ----------------------------- |
+| CI/CD                  | GitHub Actions / GitLab CI    |
+| Code Quality           | ESLint, Prettier, SonarQube   |
+| Security Scanning      | Trivy                         |
+| Containerization       | Docker                        |
+| Orchestration          | Kubernetes (K8s)              |
+| GitOps (optional)      | Argo CD / Flux                |
+| Monitoring (optional)  | Prometheus + Grafana          |
+| Registry               | Docker Hub / GHCR             |
+| Deployment Environment | Vercel (Preview) / K8s (Prod) |
+
+---
+
+## 🧠 How It Works
+
+```text
+1. Code pushed to GitHub/GitLab main branch
+2. CI/CD pipeline is triggered
+   ├── Linting, formatting, and testing
+   ├── Security scans with Trivy
+   ├── SonarQube analysis
+   ├── Docker image built and pushed to registry
+   └── Kubernetes deployment applied via kubectl or GitOps (Argo CD/Flux)
+3. App is live on Kubernetes!
+```
+
+---
+
+## 📂 Example Folder Structure
+
+```bash
+├── .github/workflows/          # CI/CD workflows
+├── k8s/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── ingress.yaml
+├── sonar-project.properties
+├── Dockerfile
+├── trivy-report.json
+├── public/
+├── src/
+└── README.md
+```
+
+---
+
+## 👨‍💻 Author
+
+**Chetan Kesare**
+[GitHub](https://github.com/0x1Luffy)
+
+---
