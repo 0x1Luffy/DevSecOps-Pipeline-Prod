@@ -1,0 +1,10 @@
+# ByteMyResume robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://bytemyresume.tech/sitemap.xml
+
+# Disallow specific paths if needed
+# Disallow: /admin/
+# Disallow: /private/
